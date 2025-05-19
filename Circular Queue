@@ -1,0 +1,99 @@
+#include <stdio.h>
+#define SIZE 5 
+
+int queue[SIZE];  
+int front = -1, rear = -1; 
+
+int isFull() {
+    
+    return (front == (rear + 1) % SIZE);  
+}
+
+int isEmpty() {
+    
+    return (front == -1);  
+}
+
+int main() {
+    int choice, item;
+
+    
+    while (1) {
+        printf("\n1. Enqueue\n2. Dequeue\n3. Display\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1) {  
+            if (isFull()) {
+                
+                printf("Queue is full\n");
+            } else {
+                
+                printf("Enter item to enqueue: ");
+                scanf("%d", &item);
+                
+                
+                if (isEmpty()) {
+                    front = rear = 0;
+                } else {
+                    
+                    rear = (rear + 1) % SIZE;
+                }
+                
+                queue[rear] = item;
+                printf("%d added to the queue\n", item);
+            }
+        }
+
+        else if (choice == 2) {  
+            if (isEmpty()) {
+    
+                printf("Queue is empty\n");
+            } else {
+                
+                printf("%d removed from the queue\n", queue[front]);
+                
+        
+                if (front == rear) {
+                    front = rear = -1;
+                } else {
+                    
+                    front = (front + 1) % SIZE;
+                }
+            }
+        }
+
+        else if (choice == 3) {  
+            if (isEmpty()) {
+                
+                printf("Queue is empty\n");
+            } else {
+                
+                printf("Queue: ");
+                int i = front;
+                
+                while (1) {
+                    printf("%d ", queue[i]);
+                    
+                    if (i == rear)
+                        break;
+                    
+                    i = (i + 1) % SIZE;
+                }
+                printf("\n");
+            }
+        }
+
+        else if (choice == 4) {  
+            printf("Exiting...\n");
+            break;  
+        }
+
+        else {
+            
+            printf("Invalid choice\n");
+        }
+    }
+
+    return 0;
+}
