@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+int main()
+{
+    int n, i, found = 0;  
+    
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+    
+    int a[n];  
+    
+    printf("Enter %d elements: ", n);
+    for(i = 0; i < n; i++){
+        scanf("%d", &a[i]);  
+    }
+    
+    int b;  
+    printf("Enter the element you want to search: ");
+    scanf("%d", &b);  
+    
+    
+    printf("\nSearching for element %d...\n", b);
+    for(i = 0; i < n; i++){
+        printf("Pass %d: Checking index [%d], value = %d\n", i + 1, i, a[i]); 
+        
+        if(a[i] == b){  
+            printf("\nThe element [%d] is present at index [%d] (Position %d in 1-based index)\n", a[i], i, i + 1);
+            found = 1;  
+            break;  
+        }
+    }
+    
+    
+    if(found == 0){
+        printf("\nElement not found.\n");
+    }
+
+    return 0;
+}
