@@ -1,0 +1,68 @@
+#include <stdio.h>
+#define MAX 10  
+
+int stack[MAX], top = -1; 
+
+
+void push() {
+    if (top == MAX - 1) {  
+        printf("Stack Overflow! Cannot push more elements.\n");
+        return;
+    }
+    int value;
+    printf("Enter value to push: ");
+    scanf("%d", &value);
+    stack[++top] = value; 
+    printf("%d pushed onto the stack.\n", value);
+}
+
+
+void pop() {
+    if (top == -1) {  
+        printf("Stack Underflow! No elements to pop.\n");
+    } else {
+        printf("Popped: %d\n", stack[top--]); 
+    }
+}
+
+
+void display() {
+    if (top == -1) {  
+        printf("Stack is empty.\n");
+    } else {
+        printf("Stack elements (Top to Bottom):\n");
+        for (int i = top; i >= 0; i--) {
+            printf("[%d] -> %d\n", i, stack[i]); 
+        }
+    }
+}
+
+int main() {
+    int choice;
+    do {
+        
+        printf("\n1. Push  2. Pop  3. Display  4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        
+        
+        switch (choice) {
+            case 1:
+                push();
+                break;
+            case 2:
+                pop();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                printf("Exiting program...\n");
+                break;
+            default:
+                printf("Invalid choice! Please enter a valid option.\n");
+        }
+    } while (choice != 4);  
+    
+    return 0;
+}
