@@ -1,0 +1,105 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+struct node *front = NULL, *rear = NULL;
+
+void enqueue() {
+    
+    struct node *newNode = (struct node *)malloc(sizeof(struct node));
+    if (!newNode) {
+        printf("Memory allocation failed\n");
+        return;
+    }
+
+    
+    printf("Enter the data to enqueue: ");
+    scanf("%d", &newNode->data);
+    newNode->next = NULL;
+
+    
+    if (front == NULL && rear == NULL) {
+        front = rear = newNode;
+    } else {
+        rear->next = newNode;  
+        rear = newNode;        
+    }
+
+    printf("%d enqueued to queue.\n", newNode->data);
+}
+
+void dequeue() {
+    
+    if (front == NULL) {
+        printf("Queue is empty. Nothing to dequeue.\n");
+        return;
+    }
+
+    
+    struct node *temp = front;
+    printf("Dequeued: %d\n", temp->data);
+    front = front->next;
+
+    
+    if (front == NULL) {
+        rear = NULL;
+    }
+
+    free(temp); 
+}
+
+
+void display() {
+    if (front == NULL) {
+        printf("Queue is empty.\n");
+        return;
+    }
+
+    printf("Queue elements (front to rear):\n");
+    struct node *temp = front;
+    while (temp != NULL) {
+        printf("%d\n", temp->data);
+        temp = temp->next;
+    }
+}
+
+
+int main() {
+    int choice, cont;
+
+    printf("Queue using Linked List\n");
+
+    do {
+        
+        printf("\nMenu:\n");
+        printf("1. Enqueue\n");
+        printf("2. Dequeue\n");
+        printf("3. Display\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        
+        switch (choice) {
+            case 1: enqueue(); break;
+            case 2: dequeue(); break;
+            case 3: display(); break;
+            case 4:
+                printf("Exiting program.\n");
+                exit(0);
+            default:
+                printf("Invalid choice. Try again.\n");
+        }
+
+        
+        printf("Press 1 to continue, any other key to exit: ");
+        scanf("%d", &cont);
+
+    } while (cont == 1);
+
+    return 0;
+}
